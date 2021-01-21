@@ -21,12 +21,10 @@ jobs:
     - name: Inspect Generated SARIF
       run: cat ${{ steps.scan.outputs.sarif }}
 
-    # Commented out to prevent incorrect SARIF uploads for this action
-    # TODO: add functional tests that validate this
-    # - name: Upload SARIF
-    #   uses: github/codeql-action/upload-sarif@v1
-    #   with:
-    #     sarif_file: ${{ steps.scan.outputs.sarif }}
+    - name: upload Anchore scan SARIF report
+      uses: github/codeql-action/upload-sarif@v1
+      with:
+        sarif_file: ${{ steps.scan.outputs.sarif }}
 
   sarif-directory:
     runs-on: ubuntu-latest
